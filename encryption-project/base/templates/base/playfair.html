@@ -2,6 +2,7 @@
 {% block title %}PlayFair Encryption{% endblock %}
 {% block content %}
 <div>
+    Encryption:
     <form id="playfair_encryption_form" method="post">
     {% csrf_token %}
     <input onkeydown="return /[a-z]/i.test(event.key)" id="encryption_key" name="encryption_key" type="text" class="query-search" placeholder="Key">
@@ -35,6 +36,7 @@
 <br >
 <hr>
 <div>
+    Decryption:
     <form id="playfair_decryption_form" method="post">
     {% csrf_token %}
     <input onkeydown="return /[a-z]/i.test(event.key)" id="decryption_key" name="decryption_key" type="text" class="query-search" placeholder="Key">
