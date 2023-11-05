@@ -44,8 +44,8 @@ def prepare_matrix(key):
 
 def playfair_encryption(request):
     if request.method == 'POST':
-        key = request.POST.get('encryption_key')
-        message = request.POST.get('encryption_message')
+        key = request.POST.get('encryption_key').lower()
+        message = request.POST.get('encryption_message').lower()
 
         matrix = prepare_matrix(key)
         pairs = [message[i:i + 2] for i in range(0, len(message), 2)]
