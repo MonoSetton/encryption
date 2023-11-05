@@ -25,7 +25,12 @@ SECRET_KEY = 'django-insecure-zdj(apfr5z$ghqz24%vskahq$z*!b=v80=b988euu!fzd%)ckm
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+
+CSRF_TRUSTED_ORIGINS = [
+    'http://encryption-production.up.railway.app',
+    'https://encryption-production.up.railway.app',
+]
 
 
 # Application definition
