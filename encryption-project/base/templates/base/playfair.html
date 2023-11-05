@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% block title %}PlayFair Encryption{% endblock %}
+{% block content %}
+<div>
+    <form id="playfair_encryption_form" method="post">
+    {% csrf_token %}
+    <input onkeydown="return /[a-z]/i.test(event.key)" id="encryption_key" name="encryption_key" type="text" class="query-search" placeholder="Key">
+    <input onkeydown="return /[a-z]/i.test(event.key)" id="encryption_message" name="encryption_message" type="text" class="query-search" placeholder="Message">
+    <button type="button" id="submit_encryption_form">Submit</button>
+    </form>
+</div>
+
+<div id="encrypted_message"></div>
+
+<script>
+        $(document).ready(function() {
+            $("#submit_encryption_form").click(function() {
+                var encryption_key = $("#encryption_key").val();
+                var encryption_message = $("#encryption_message").val();
+                $.ajax({
+                    type: "POST",
+                    url: "playfair_encryption",
+                    data: {
+                        'encryption_key': encryption_key,
+                        'encryption_message': encryption_message,
+                        csrfmiddlewaretoken: '{{ csrf_token }}'
+                    },
+                    success: function(response) {
+                        $("#encrypted_message").html("Result: " + response.result);
+                    }
+                });
+            });
+        });
+    </script>
+<br >
+<hr>
+<div>
+    <form id="playfair_decryption_form" method="post">
+    {% csrf_token %}
+    <input onkeydown="return /[a-z]/i.test(event.key)" id="decryption_key" name="decryption_key" type="text" class="query-search" placeholder="Key">
+    <input onkeydown="return /[a-z]/i.test(event.key)" id="decryption_message" name="decryption_message" type="text" class="query-search" placeholder="Message">
+    <button type="button" id="submit_decryption_form">Submit</button>
+    </form>
+</div>
+
+<div id="decrypted_message"></div>
+
+<script>
+        $(document).ready(function() {
+            $("#submit_decryption_form").click(function() {
+                var decryption_key = $("#decryption_key").val();
+                var decryption_message = $("#decryption_message").val();
+                $.ajax({
+                    type: "POST",
+                    url: "playfair_decryption",
+                    data: {
+                        'decryption_key': decryption_key,
+                        'decryption_message': decryption_message,
+                        csrfmiddlewaretoken: '{{ csrf_token }}'
+                    },
+                    success: function(response) {
+                        $("#decrypted_message").html("Result: " + response.result);
+                    }
+                });
+            });
+        });
+    </script>
+
+{% endblock %}
